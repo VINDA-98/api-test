@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
 )
 
 type ReturnData struct {
@@ -94,6 +95,47 @@ func main() {
 	}
 	departments = append(departments, department8)
 
+	var department9 = Department{
+		ID:       "d10000009",
+		Name:     "事业一组",
+		ParentId: department2.ID,
+		Order:    0,
+	}
+	departments = append(departments, department9)
+
+	var department10 = Department{
+		ID:       "d10000010",
+		Name:     "事业二组",
+		ParentId: department2.ID,
+		Order:    0,
+	}
+	departments = append(departments, department10)
+
+	//子部门
+	var department11 = Department{
+		ID:       "d10000011",
+		Name:     "绩效组",
+		ParentId: department5.ID,
+		Order:    0,
+	}
+	departments = append(departments, department11)
+
+	var department12 = Department{
+		ID:       "d10000012",
+		Name:     "绩效一组",
+		ParentId: department11.ID,
+		Order:    0,
+	}
+	departments = append(departments, department12)
+
+	var department13 = Department{
+		ID:       "d10000013",
+		Name:     "绩效二组",
+		ParentId: department11.ID,
+		Order:    1,
+	}
+	departments = append(departments, department13)
+
 	var members []Member
 	for i := 0; i < 20; i++ {
 		var bianHao = strconv.Itoa(i + 1)
@@ -113,6 +155,54 @@ func main() {
 				EmployeeNo: "e100000" + bianHao,
 				Department: []string{department8.ID},
 				Email:      "liangzai" + bianHao + "@ones.cn",
+			}
+			members = append(members, member)
+		}
+
+	}
+
+	for i := 20; i < 40; i++ {
+		var bianHao = strconv.Itoa(i + 1)
+		if i < 30 {
+			var member = Member{
+				Userid:     "100" + bianHao,
+				Name:       "表锅" + bianHao,
+				EmployeeNo: "e100000" + bianHao,
+				Department: []string{department9.ID},
+				Email:      "biaoguo" + bianHao + "@ones.cn",
+			}
+			members = append(members, member)
+		} else {
+			var member = Member{
+				Userid:     "100" + bianHao,
+				Name:       "表锅" + bianHao,
+				EmployeeNo: "e100000" + bianHao,
+				Department: []string{department10.ID},
+				Email:      "biaoguo" + bianHao + "@ones.cn",
+			}
+			members = append(members, member)
+		}
+
+	}
+
+	for i := 40; i < 60; i++ {
+		var bianHao = strconv.Itoa(i + 1)
+		if i < 50 {
+			var member = Member{
+				Userid:     "100" + bianHao,
+				Name:       "表妹" + bianHao,
+				EmployeeNo: "e100000" + bianHao,
+				Department: []string{department12.ID},
+				Email:      "biaomei" + bianHao + "@ones.cn",
+			}
+			members = append(members, member)
+		} else {
+			var member = Member{
+				Userid:     "100" + bianHao,
+				Name:       "表妹" + bianHao,
+				EmployeeNo: "e100000" + bianHao,
+				Department: []string{department13.ID},
+				Email:      "biaomei" + bianHao + "@ones.cn",
 			}
 			members = append(members, member)
 		}
