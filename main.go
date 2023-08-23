@@ -209,6 +209,73 @@ func main() {
 
 	}
 
+	for i := 1; i < 9000; i++ {
+		var bianHao = strconv.Itoa(i + 1)
+		if i < 50 {
+			var member = Member{
+				Userid:     "1" + bianHao,
+				Name:       "小兵" + bianHao,
+				EmployeeNo: "e100" + bianHao,
+				Department: []string{department2.ID},
+				Email:      "xiaobing" + bianHao + "@ones.cn",
+			}
+			members = append(members, member)
+		} else {
+			var member = Member{
+				Userid:     "100" + bianHao,
+				Name:       "小兵" + bianHao,
+				EmployeeNo: "e100000" + bianHao,
+				Department: []string{department1.ID},
+				Email:      "xiaobing" + bianHao + "@ones.cn",
+			}
+			members = append(members, member)
+		}
+
+	}
+
+	for i := 0; i < 10; i++ {
+		var bianHao = strconv.Itoa(i*1000 + 1)
+		var departmentI = Department{
+			ID:       "d10000011" + bianHao,
+			Name:     "高校组" + bianHao,
+			ParentId: department1.ID,
+			Order:    i,
+		}
+
+		for j := 0; j < 10; j++ {
+			var bianHao = strconv.Itoa(i*1000 + 1 + j*100)
+			var departmentJ = Department{
+				ID:       "d10000011" + bianHao,
+				Name:     "逗比组" + bianHao,
+				ParentId: departmentI.ID,
+				Order:    i,
+			}
+			departments = append(departments, departmentJ)
+			for z := 0; z < 5; z++ {
+				var bianHao = strconv.Itoa(i*1000 + 1 + j*100 + z*10)
+				var departmentZ = Department{
+					ID:       "d10000011" + bianHao,
+					Name:     "沙雕组" + bianHao,
+					ParentId: departmentJ.ID,
+					Order:    i,
+				}
+				departments = append(departments, departmentZ)
+				for k := 0; k < 3; k++ {
+					var bianHao = strconv.Itoa(i*1000 + 1 + j*100 + z*10 + k)
+					var departmentK = Department{
+						ID:       "d10000011" + bianHao,
+						Name:     "吃瓜组" + bianHao,
+						ParentId: departmentZ.ID,
+						Order:    i,
+					}
+					departments = append(departments, departmentK)
+				}
+			}
+
+		}
+		departments = append(departments, departmentI)
+	}
+
 	r.GET("/hello", func(c *gin.Context) {
 		// c.JSON：返回JSON格式的数据
 		c.JSON(200, gin.H{
