@@ -45,11 +45,15 @@ func main() {
 	})
 
 	r.GET("/members/pro", func(c *gin.Context) {
-		token, b := c.Params.Get("token")
-		if !b {
-			log.Println("token is empty")
-		}
+		token := c.Query("token")
 		log.Println("token is ", token)
+		if token != "123456" {
+			c.JSON(200, gin.H{
+				"members":     make([]string, 0),
+				"departments": make([]string, 0),
+			})
+			return
+		}
 		departments, members := GetDepartment1000()
 		// c.JSON：返回JSON格式的数据
 		c.JSON(200, gin.H{
